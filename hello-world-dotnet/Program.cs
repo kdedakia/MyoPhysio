@@ -11,6 +11,13 @@ namespace hello_world_dotnet
             Hub hub = new Hub();
             SimpleDeviceListener deviceListener = new SimpleDeviceListener();
 
+            SimpleDeviceListener motionDataListener = new SimpleDeviceListener();
+
+            motionDataListener.onMotion += (object sender, PoseEventArgs e) =>
+            {
+
+            };
+
             //Step 2: Hook up the handers for the events you care about
             deviceListener.PoseStart += (object sender, PoseEventArgs e) => 
             {
