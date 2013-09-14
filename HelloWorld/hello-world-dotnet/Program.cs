@@ -13,11 +13,12 @@ namespace hello_world_dotnet
 
             SimpleDeviceListener motionDataListener = new SimpleDeviceListener();
 
-            motionDataListener.onMotion += (object sender, PoseEventArgs e) =>
-            {
+            motionDataListener.onActive += (object sender, PoseEventArgs e) => 
+            { 
+                hub.DefaultDevice.motion.orientation
+            }
 
-            };
-
+            
             //Step 2: Hook up the handers for the events you care about
             deviceListener.PoseStart += (object sender, PoseEventArgs e) => 
             {
@@ -37,6 +38,7 @@ namespace hello_world_dotnet
 
             //Step 3: Add the listener to the default device
             hub.DefaultDevice.AddListener(deviceListener);
+            hub.DefaultDevice.AddListener(motionDataListener);
 
             Console.WriteLine("Round 1: FIGHT");
             Console.WriteLine("Press enter to Quit");
