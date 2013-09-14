@@ -3,6 +3,7 @@
 #include <myo.h>
 #include <fstream>
 #include <sstream>   
+#include "state.h"
 
 using namespace std;
 
@@ -18,6 +19,9 @@ void main() {
     //Step 1: Create all the things
     myo::Hub hub;
     myo::SimpleDeviceListener deviceListener;
+
+	State firstState, durationState, lastState;
+	State armStretch[3] = {firstState, durationState, lastState};
 
     //Step 2: Hook up the handlers for the events you care about
     deviceListener.onPoseStart().add([] (const myo::Pose& pose) {
