@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <myo.h>
 #include <fstream>
@@ -5,7 +6,14 @@
 
 using namespace std;
 
+#include "model.h"
+#include "console.h"
+
+static Model model;
+
 void main() {
+	Console console;
+	model.addObserver(console);
     
     //Step 1: Create all the things
     myo::Hub hub;
@@ -51,13 +59,40 @@ void main() {
 				myfile.close();
 				exit(true);
 			}
+			if (model.isDetecting()) {
+				Move move(motion.orientation().yaw().radians, motion.orientation().pitch().radians, motion.orientation().roll().radians,
+					motion.acceleration().x, motion.acceleration().y, motion.acceleration().z,
+					motion.angularVelocity().x, motion.angularVelocity().y, motion.angularVelocity().z);
+				model.move(move);
+			}
 	});
 	
 
     //Step 3: Add the listener to the default device
     hub.defaultDevice().addListener(deviceListener);
 
-    std::cout << "Round 1: FIGHT!" << std::endl;
-    std::cout << "Press enter to end";
-    std::cin.ignore();
+	int choice;
+	do {
+		std::cout << "Select exercises" << std::endl;
+		std::cout << "1) Exercise A" << std::endl;
+		std::cout << "2) Exercise B" << std::endl;
+		std::cout << "3) Exit" << std::endl;
+
+		int choice;
+		std::cin >> choice;
+		switch (choice) {
+		case 1:
+		case 2:
+			runExercise(choice);
+			break;
+		default:
+			break;
+		}
+	} while (choice != 3);
+}
+
+void runExercise(int choice) {
+	model.setDetecting(true);
+	std::cin.ignore;
+	model.setDetecting(false);
 }
