@@ -12,11 +12,20 @@ namespace hello_world_dotnet
             SimpleDeviceListener deviceListener = new SimpleDeviceListener();
 
             SimpleDeviceListener motionDataListener = new SimpleDeviceListener();
-
+            
             motionDataListener.PoseStart += (object sender, PoseEventArgs e) => 
             { 
-                Quaternion quat;
-                quat = hub.DefaultDevice.Motion.Orientation;
+                Motion deviceMotion = hub.DefaultDevice.Motion;
+                
+                Double angularVelocity = angularVelocityMagnitude(deviceMotion.AngularVelocity.X, deviceMotion.AngularVelocity.X, deviceMotion.AngularVelocity.Z);
+                Quaternion quat = deviceMotion.Orientation;
+
+                if (quat.Pitch.Degrees >= 88.0 && quat.Pitch.Degrees <= 92.0)
+                {
+                    startHold();
+                }
+                //quat.
+
             };
 
             //Step 2: Hook up the handers for the events you care about
@@ -49,9 +58,14 @@ namespace hello_world_dotnet
             return timeFinish-timeStart;
         }
 
-        public static double angularVelocityMagnitude(int x, int y, int z)
+        public static double angularVelocityMagnitude(double x, double y, double z)
         {
             return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
+        }
+
+        public static void startHold()
+        {
+
         }
     }
  
