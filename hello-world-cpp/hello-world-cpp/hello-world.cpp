@@ -1,5 +1,9 @@
 #include <iostream>
 #include <myo.h>
+#include <fstream>
+#include <sstream>   
+
+using namespace std;
 
 void main() {
     
@@ -19,13 +23,36 @@ void main() {
             std::cout << "UKEN" << std::endl;
         }
     });
+	
+	static ofstream myfile;
+	myfile.open ("exercise_data.txt");
+	myfile << "Writing this to a file.\n";
+	
+	static int i = 0;
+	static double pitch[1000];
+	static double roll[1000];
+	static double yaw[1000];
 
 	deviceListener.onMotion().add([] (const myo::Motion& motion) {
-		//while (true) {
-			std::cout << motion.orientation().pitch().degrees();
+			std::cout << motion.orientation().pitch().degrees() << endl;
+			
+			if (i < 1000) {
+				pitch[i] =  motion.orientation().pitch().degrees(); 
+				roll[i] = motion.orientation().roll().degrees(); 
+				yaw[i] = motion.orientation().yaw().degrees(); 
+				
+				stringstream s;
+				s << pitch[i] << "," << roll[i] << "," << yaw[i] << "\n";
+				myfile << s.str();
 
-		//}
+				i += 1;
+			}
+			else {
+				myfile.close();
+				exit(true);
+			}
 	});
+	
 
     //Step 3: Add the listener to the default device
     hub.defaultDevice().addListener(deviceListener);
