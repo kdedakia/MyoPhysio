@@ -22,15 +22,33 @@ namespace MyoPysioProject
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        Student student = new Student();
         public MainWindow()
         {
             InitializeComponent();
+            this.statusText.DataContext = student;
 
-            WriteToText();
-            
+            student.StudentName = "hello";
         }
 
+        public class Student
+        {
+            private string studentname;
+            public string StudentName
+            {
+                get
+                {
+                    return studentname;
+                }
+                set
+                {
+                    studentname = value;
+                }
+            }
+        }
         public void WriteToText() {
+            
             this.statusText.Text = "hello";
         }
 
@@ -39,12 +57,22 @@ namespace MyoPysioProject
         }
 
 
-        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void ExerciseListChange(object sender, SelectionChangedEventArgs e)
         {
             ListBox item = (ListBox)sender;
             
             this.statusText.Text = item.SelectedItem.ToString();
+            
         }
+
+        private void startTestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /*private void ChangeTitleBlock(TextBlock block, ) {
+            block.Text = text;
+        }*/
 
        
 
