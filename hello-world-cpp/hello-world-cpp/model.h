@@ -11,12 +11,12 @@ class Model {
 
 	bool detecting;
 	std::list<View&> views;
-	Move lastMove;
 
 	std::mutex moveLock;
 	void notifyObservers();
 
 public:
+	Move lastMove;
 	Model() : detecting(false) {}
 	void move(Move &move);
 	bool isDetecting();

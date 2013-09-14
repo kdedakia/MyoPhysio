@@ -1,4 +1,5 @@
 #include "console.h"
+#include <iostream>
 
 void Console::update(Model *model) {
 	Move move = model->lastMove;

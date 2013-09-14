@@ -7,8 +7,10 @@ void Model::notifyObservers() {
 }
 
 void Model::move(Move &move) {
-	lastMove = move;
-	notifyObservers();
+	if (isDetecting) {
+		lastMove = move;
+		notifyObservers();
+	}
 }
 
 double distance(State state, double yaw, double pitch, double roll) {
