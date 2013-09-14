@@ -100,3 +100,4 @@ void runExercise(int choice) {
 	std::cin.ignore;
 	model.setDetecting(false);
 }
+
