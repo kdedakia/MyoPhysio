@@ -4,18 +4,23 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="33*"/>
             <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Name="statusText" HorizontalAlignment="Left" Margin="0,100,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="110" Width="160" Grid.Row="1"/>
-        <Image HorizontalAlignment="Left" Height="245" Margin="165,0,0,0" VerticalAlignment="Top" Width="342" Grid.RowSpan="2"/>
-        <ListBox Name="exerciseSelect" HorizontalAlignment="Left" Height="75" Margin="165,235,0,0" Grid.Row="1" VerticalAlignment="Top" Width="352" SelectionChanged="ListBox_SelectionChanged_1">
+        <TextBlock Name="titleText" HorizontalAlignment="Left" Margin="170,0,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Height="45" Width="347" TextAlignment="Center"/>
+        <TextBlock Name="statusText" HorizontalAlignment="Left" Margin="0,100,0,0" TextWrapping="Wrap" Text="{Binding Path=StudentName}" VerticalAlignment="Top" Height="110" Width="160" Grid.RowSpan="2"/>
+        <TextBlock Name="instructionsText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="105" Width="165"/>
+        <Image Name="exerciseImage"  HorizontalAlignment="Left" Height="185" Margin="165,45,0,0" VerticalAlignment="Top" Width="342" Grid.RowSpan="2"/>
+        <ListBox Name="exerciseList" HorizontalAlignment="Left" Height="75" Margin="165,70,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ExerciseListChange" Grid.Row="1">
             <ListBoxItem>Mike</ListBoxItem>
             <ListBoxItem>Lisa</ListBoxItem>
             <ListBoxItem>John</ListBoxItem>
             <ListBoxItem>Mary</ListBoxItem>
         </ListBox>
+        <Button Name="startTestButton" Content="Start Test" HorizontalAlignment="Left" Margin="400,100,0,0" VerticalAlignment="Top" Width="107" Grid.Row="1" Click="startTestButton_Click"/>
+
+
 
     </Grid>
 </Window>
