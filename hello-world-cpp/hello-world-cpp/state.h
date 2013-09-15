@@ -1,6 +1,3 @@
-#ifndef STATE_H_
-#define STATE_H_
-
 #include <string>
 
 class State {
@@ -13,5 +10,3 @@ public:
 	int duration;
 
 };
-
-#endif	// STATE_H_
